@@ -1,22 +1,22 @@
 
 public class Node {
-	private Node nextNode;
-	private Object data;
-		
-	public Node (Object data) {
-		this.data = data;
-	}
+    private Node nextNode;
+    private Object data;
 
-	public Node getNextNode() {
-		return nextNode;
-	}
+    public Node(Object data) {
+        this.data = data;
+    }
 
-	public void setNextNode(Node nextNode) {
-		this.nextNode = nextNode;
-	}
+    public Node getNextNode() {
+        return nextNode;
+    }
 
-	public Object getData() {
-		return data;
-	}
+    public void setNextNode(Node nextNode) {
+        this.nextNode = nextNode;
+    }
+
+    public Object getData() {
+        return data;
+    }
 
 }
