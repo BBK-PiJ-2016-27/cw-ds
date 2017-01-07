@@ -26,25 +26,25 @@ public class LinkedListImpl implements List {
 
     @Override
     public ReturnObject get(int index) {
-        if (index < 0 || index > mySize) {
+        if (index < 0 || index >= size()) {
             return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
         } else {
             int nodeCount = 0;
             Node currentNode = head;
             while (currentNode.getNextNode() != null) {
-                currentNode = currentNode.getNextNode();
-                nodeCount++;
                 if (nodeCount == index) {
                     return new ReturnObjectImpl(currentNode.getData());
                 }
+                currentNode = currentNode.getNextNode();
+                nodeCount++;
             }
+            return new ReturnObjectImpl(currentNode.getData());
         }
-        return null;
     }
 
     @Override
     public ReturnObject remove(int index) {
-        if (index < 0 || index >= mySize) {
+        if (index < 0 || index >= size()) {
             return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
         } else {
             if (index == 0) {
@@ -52,6 +52,9 @@ public class LinkedListImpl implements List {
                 head = nodeToRemove.getNextNode();
                 nodeToRemove.setNextNode(null);
                 mySize--;
+                Object toReturn = nodeToRemove.getData();
+                ReturnObjectImpl returnObject = new ReturnObjectImpl(toReturn);
+                return returnObject;
             } else {
                 int nodeCount = 0;
                 Node auxiliary = head;
@@ -63,14 +66,16 @@ public class LinkedListImpl implements List {
                 auxiliary.setNextNode(nodeToRemove.getNextNode());
                 nodeToRemove.setNextNode(null);
                 mySize--;
+                Object toReturn = nodeToRemove.getData();
+                ReturnObjectImpl returnObject = new ReturnObjectImpl(toReturn);
+                return returnObject;
             }
         }
-        return null;
     }
 
     @Override
     public ReturnObject add(int index, Object item) {
-        if (index < 0 || index >= mySize) {
+        if (index < 0 || index >= size()) {
             return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
         } else {
             int nodeCount = 0;
@@ -93,7 +98,8 @@ public class LinkedListImpl implements List {
                 mySize++;
             }
         }
-        return null;
+        Object emptyObject = null;
+        return new ReturnObjectImpl(emptyObject);
     }
 
     @Override
@@ -115,12 +121,18 @@ public class LinkedListImpl implements List {
             currentNode.setNextNode(nodeToBeAdded);
             mySize++;
         }
-        return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
+        Object emptyObject = null;
+        return new ReturnObjectImpl(emptyObject);
     }
 
     public String toString() {
         String s = "[";
         Node currentNode = head;
+        if (head == null) {
+            s += "]";
+            return s;
+        }
+
         while (currentNode.getNextNode() != null) {
             s = s + currentNode.getData() + ",";
             currentNode = currentNode.getNextNode();
