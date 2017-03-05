@@ -1,4 +1,12 @@
 Please see the general comments, some of which are applicable to your submission.
 The output of the various checking tools should be paid attention to although checkstyle is a little "aggressive".
 
-...
+See general comments re:
+
+* packages
+* javadoc and comments (@see and @inherits)
+* returning true/false
+* Internal classes being "private" or at least "package" access
+* Going forward preferring unit testing over "ad-hoc" tests
+
+public class Node {
